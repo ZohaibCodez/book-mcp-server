@@ -1,0 +1,16 @@
+runtime: "container"
+build:
+  dockerfile: "Dockerfile"
+  dockerBuildPath: "."
+startCommand:
+  type: "http"
+  configSchema:
+    type: "object"
+    properties:
+      port:
+        type: "integer"
+        description: "Port to bind; defaults to env PORT or 8000"
+    required: []
+  exampleConfig: {}
+
+
