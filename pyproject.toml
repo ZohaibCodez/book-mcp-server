@@ -1,9 +1,46 @@
 [project]
 name = "book-mcp-server"
 version = "0.1.0"
-description = "Add your description here"
+description = "An MCP server exposing tools, resources, and prompts to browse, search, and recommend books from a local dataset."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "mcp>=1.13.0",
+    "pydantic>=2.0.0",
+    "uvicorn>=0.30.0",
+]
+
+authors = [
+    { name = "ZohaibCodez", email = "itxlevicodez@gmail.com" },
+]
+license = { file = "LICENSE" }
+keywords = ["mcp", "server", "books", "api", "uvicorn"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Internet :: WWW/HTTP",
+]
+
+[project.scripts]
+book-mcp-server = "server:main"
+
+[project.urls]
+homepage = "https://github.com/ZohaibCodez"
+repository = "https://github.com/ZohaibCodez/book-mcp-server"
+issues = "https://github.com/ZohaibCodez/book-mcp-server/issues"
+
+[build-system]
+requires = ["hatchling>=1.18.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+include = [
+    "server.py",
+    "data/**",
+    "README.md",
+    "LICENSE",
 ]
