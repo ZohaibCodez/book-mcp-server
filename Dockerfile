@@ -20,12 +20,12 @@ COPY data/ /app/data/
 # Create and sync virtual environment from lockfile
 RUN uv sync --frozen
 
-# Ensure uvicorn is available in the virtual environment for dev reload
-RUN uv pip install "uvicorn[standard]>=0.30.0"
+## uvicorn is already declared in pyproject dependencies and installed by `uv sync`
 
 # Copy application code
 COPY . /app
 
 EXPOSE 8000
 
-CMD ["uv", "run", "uvicorn", "server:mcp_server", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Start directly with uvicorn from the built virtualenv, honoring PORT if provided
+CMD ["sh", "-c", "/app/.venv/bin/uvicorn server:mcp_server --host 0.0.0.0 --port ${PORT:-8000}"]
