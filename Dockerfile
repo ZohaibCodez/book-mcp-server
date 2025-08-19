@@ -16,12 +16,6 @@ RUN pip install --upgrade pip && pip install uv
 COPY pyproject.toml /app/pyproject.toml
 COPY uv.lock /app/uv.lock
 
-# Copy metadata and module files required for editable build
-COPY README.md /app/README.md
-COPY LICENSE /app/LICENSE
-COPY server.py /app/server.py
-COPY data/ /app/data/
-
 # Copy source code
 COPY . /app
 

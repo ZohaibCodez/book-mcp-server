@@ -8,34 +8,27 @@ Refactors include:
 - Consistent and informative docstrings
 - Type hints for better editor and static analysis support
 - Centralized data loading and helper utilities
-- Basic logging instead of print statements
 """
 
 import json
-import os
-import logging
 import random
 from typing import Any, Dict, List
 
 from mcp.server.fastmcp import FastMCP
 from pydantic import Field
-import uvicorn
 
 
-# Configure basic logging for visibility in server environments
-logging.basicConfig(level=logging.INFO)
 
-PORT = os.getenv("PORT", 8000)
 
 # Create the MCP application
-mcp_app = FastMCP(name="book-mcp-server", stateless_http=True,port=PORT)
+mcp_app = FastMCP(name="book-mcp-server", stateless_http=True)
 
 
 # -------------------------
 # Data loading and helpers
 # -------------------------
 
-DATA_FILE_PATH: str = "data/data.json"
+DATA_FILE_PATH: str = "data.json"
 
 
 def _load_books_data(file_path: str) -> List[Dict[str, Any]]:
@@ -54,7 +47,6 @@ def _load_books_data(file_path: str) -> List[Dict[str, Any]]:
 
 
 BOOKS_DATA: List[Dict[str, Any]] = _load_books_data(DATA_FILE_PATH)
-logging.info("Loaded %d books", len(BOOKS_DATA))
 
 
 def _to_lower(value: Any) -> str:

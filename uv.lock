@@ -37,19 +37,13 @@ wheels = [
 [[package]]
 name = "book-mcp-server"
 version = "0.1.0"
-source = { editable = "." }
+source = { virtual = "." }
 dependencies = [
     { name = "mcp" },
-    { name = "pydantic" },
-    { name = "uvicorn" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "mcp", specifier = ">=1.13.0" },
-    { name = "pydantic", specifier = ">=2.0.0" },
-    { name = "uvicorn", specifier = ">=0.30.0" },
-]
+requires-dist = [{ name = "mcp", specifier = ">=1.13.0" }]
 
 [[package]]
 name = "certifi"
