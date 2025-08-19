@@ -25,9 +25,10 @@ import uvicorn
 # Configure basic logging for visibility in server environments
 logging.basicConfig(level=logging.INFO)
 
+PORT = os.getenv("PORT", 8000)
 
 # Create the MCP application
-mcp_app = FastMCP(name="book-mcp-server", stateless_http=True)
+mcp_app = FastMCP(name="book-mcp-server", stateless_http=True,port=PORT)
 
 
 # -------------------------
@@ -306,18 +307,6 @@ def summarize_book_prompt(
     except Exception as exc:  # Defensive: ensure prompt never raises
         return f"Error processing book: {exc}"
 
-
 mcp_server = mcp_app.streamable_http_app()
 
-
-def main() -> None:
-    """Run the MCP server using uvicorn.
-
-    Honors the PORT environment variable (defaults to 8000).
-    """
-    port = int(os.environ.get("PORT", "8000"))
-    uvicorn.run("server:mcp_server", host="0.0.0.0", port=port)
-
-
-if __name__ == "__main__":
-    main()
+    

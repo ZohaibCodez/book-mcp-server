@@ -25,9 +25,6 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP",
 ]
 
-[project.scripts]
-book-mcp-server = "server:main"
-
 [project.urls]
 homepage = "https://github.com/ZohaibCodez"
 repository = "https://github.com/ZohaibCodez/book-mcp-server"

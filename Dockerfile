@@ -4,10 +4,15 @@ LABEL maintainer="itxlevicodez@gmail.com"
 
 WORKDIR /app
 
-# Install uv (Python package manager)
-RUN pip install --upgrade pip && pip install uv 
+# Install system dependencies including curl for health checks
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# Leverage build cache for dependencies
+# Install uv
+RUN pip install --upgrade pip && pip install uv
+
+# Copy dependency files
 COPY pyproject.toml /app/pyproject.toml
 COPY uv.lock /app/uv.lock
 
@@ -17,15 +22,14 @@ COPY LICENSE /app/LICENSE
 COPY server.py /app/server.py
 COPY data/ /app/data/
 
-# Create and sync virtual environment from lockfile
-RUN uv sync --frozen
-
-## uvicorn is already declared in pyproject dependencies and installed by `uv sync`
-
-# Copy application code
+# Copy source code
 COPY . /app
 
+# Install dependencies
+RUN uv sync --frozen
+
+# Expose port
 EXPOSE 8000
 
-# Start directly with uvicorn from the built virtualenv, honoring PORT if provided
-CMD ["sh", "-c", "/app/.venv/bin/uvicorn server:mcp_server --host 0.0.0.0 --port ${PORT:-8000}"]
+# Run the server - Smithery expects the app to be available at root
+CMD ["uv", "run", "uvicorn", "server:mcp_server", "--host", "0.0.0.0", "--port", "8000"]
