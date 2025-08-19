@@ -1,6 +1,7 @@
 # book-mcp-server
 
 ![Python Version](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white) ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg) ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white) [![Stars](https://img.shields.io/github/stars/ZohaibCodez/book-mcp-server?style=social)](https://github.com/ZohaibCodez/book-mcp-server) ![Last Commit](https://img.shields.io/github/last-commit/ZohaibCodez/book-mcp-server) ![Issues](https://img.shields.io/github/issues/ZohaibCodez/book-mcp-server)
+[![smithery badge](https://smithery.ai/badge/@ZohaibCodez/book-mcp-server)](https://smithery.ai/server/@ZohaibCodez/book-mcp-server)
 
 An MCP (Model Context Protocol) server exposing tools, resources, and prompts to browse, search, and recommend books from a local dataset. Built with Python 3.12, FastMCP, and uvicorn.
 
